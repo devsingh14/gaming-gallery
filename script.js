@@ -1,11 +1,27 @@
 // GSAP animations for gallery items
 document.addEventListener('DOMContentLoaded', () => {
+    const galleryCards = document.querySelectorAll('.gallery-card');
     const galleryItems = document.querySelectorAll('.gallery-item');
 
-    // Animate gallery items on load
-    gsap.fromTo(galleryItems, 
-        { opacity: 0, y: 50 }, 
-        { opacity: 1, y: 0, duration: 1, stagger: 0.2, ease: "power2.out" }
+    // Shuffle effect on page load - cards flip and arrange
+    gsap.fromTo(galleryCards, 
+        { 
+            opacity: 0, 
+            rotationY: 90, 
+            scale: 0.5,
+            y: -50,
+            z: 100
+        }, 
+        { 
+            opacity: 1, 
+            rotationY: 0, 
+            scale: 1,
+            y: 0,
+            z: 0,
+            duration: 0.8, 
+            stagger: 0.1, 
+            ease: "back.out"
+        }
     );
 
     // Lightbox functionality with GSAP transitions
