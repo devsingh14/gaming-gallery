@@ -5,6 +5,37 @@ document.addEventListener('DOMContentLoaded', () => {
     const friendsBtn = document.getElementById('friendsBtn');
     const closeFriendsBtn = document.getElementById('closeFriendsBtn');
     const friendsList = document.getElementById('friendsList');
+    const galleryBtn = document.getElementById('galleryBtn');
+    const gallery = document.querySelector('.gallery');
+
+    // Gallery button functionality
+    galleryBtn.addEventListener('click', () => {
+        gallery.classList.toggle('hidden');
+        
+        // Animate the gallery opening
+        if (!gallery.classList.contains('hidden')) {
+            const galleryCardsToAnimate = document.querySelectorAll('.gallery-card');
+            gsap.fromTo(galleryCardsToAnimate, 
+                { 
+                    opacity: 0, 
+                    rotationY: 90, 
+                    scale: 0.5,
+                    y: -50,
+                    z: 100
+                }, 
+                { 
+                    opacity: 1, 
+                    rotationY: 0, 
+                    scale: 1,
+                    y: 0,
+                    z: 0,
+                    duration: 0.8, 
+                    stagger: 0.1, 
+                    ease: "back.out"
+                }
+            );
+        }
+    });
 
     // Friends button functionality
     friendsBtn.addEventListener('click', () => {
@@ -53,27 +84,6 @@ document.addEventListener('DOMContentLoaded', () => {
             gsap.to(item, { duration: 0.2, color: '#fff' });
         });
     });
-
-    // Shuffle effect on page load - cards flip and arrange
-    gsap.fromTo(galleryCards, 
-        { 
-            opacity: 0, 
-            rotationY: 90, 
-            scale: 0.5,
-            y: -50,
-            z: 100
-        }, 
-        { 
-            opacity: 1, 
-            rotationY: 0, 
-            scale: 1,
-            y: 0,
-            z: 0,
-            duration: 0.8, 
-            stagger: 0.1, 
-            ease: "back.out"
-        }
-    );
 
     // Lightbox functionality with GSAP transitions
     const lightbox = document.createElement('div');

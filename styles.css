@@ -4,12 +4,29 @@ body {
     padding: 0;
     background-color: #111;
     color: #fff;
+    background-image: url('images/ChatGPT Image Jan 10, 2026, 06_17_00 PM.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+    pointer-events: none;
 }
 
 header {
     text-align: center;
     padding: 20px;
-    background-color: #222;
+    background-color: rgba(0, 0, 0, 0.3);
     position: relative;
 }
 
@@ -33,6 +50,30 @@ header {
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(0, 255, 150, 0.5);
+}
+
+.gallery-btn {
+    background: linear-gradient(135deg, #00ff00, #0099ff, #ff00ff);
+    background-size: 200% 200%;
+    animation: gradientShift 3s ease infinite;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1em;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 255, 150, 0.5);
+}
+
+.gallery-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 255, 150, 0.8);
+}
+
+.gallery-btn:active {
+    transform: scale(0.95);
 }
 
 .friends-btn:hover {
@@ -70,6 +111,10 @@ header {
     animation: slideIn 0.4s ease-out;
     max-width: 400px;
     width: 90%;
+}
+
+.hidden {
+    display: none !important;
 }
 
 .friends-list.hidden {
@@ -171,92 +216,42 @@ h1 {
     margin: 0;
     font-size: 2.5em;
     letter-spacing: 2px;
+    color: #fff;
+    text-shadow: 0 0 20px #ffffff, 0 0 40px #00ffff, 0 0 60px #0099ff;
+    animation: shimmer 3s ease-in-out infinite;
+    position: relative;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
 }
 
 h1 span {
     display: inline-block;
-    text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor;
     font-weight: bold;
 }
 
 .word-1 {
-    animation: ledGlow1 3s ease-in-out infinite;
+    animation: none;
 }
 
 .word-2 {
-    animation: ledGlow2 3s ease-in-out infinite;
+    animation: none;
 }
 
 .word-3 {
-    animation: ledGlow3 3s ease-in-out infinite;
+    animation: none;
 }
 
-@keyframes ledGlow1 {
+@keyframes shimmer {
     0% {
-        color: #ff0000;
-        text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000;
-    }
-    25% {
-        color: #00ff00;
-        text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00;
+        text-shadow: 0 0 20px #ffffff, 0 0 40px #00ffff, 0 0 60px #0099ff;
     }
     50% {
-        color: #0099ff;
-        text-shadow: 0 0 10px #0099ff, 0 0 20px #0099ff, 0 0 30px #0099ff;
-    }
-    75% {
-        color: #ffff00;
-        text-shadow: 0 0 10px #ffff00, 0 0 20px #ffff00, 0 0 30px #ffff00;
+        text-shadow: 0 0 30px #ffffff, 0 0 50px #00ff00, 0 0 70px #00ffff;
     }
     100% {
-        color: #ff0000;
-        text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000;
-    }
-}
-
-@keyframes ledGlow2 {
-    0% {
-        color: #00ff00;
-        text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00;
-    }
-    25% {
-        color: #0099ff;
-        text-shadow: 0 0 10px #0099ff, 0 0 20px #0099ff, 0 0 30px #0099ff;
-    }
-    50% {
-        color: #ffff00;
-        text-shadow: 0 0 10px #ffff00, 0 0 20px #ffff00, 0 0 30px #ffff00;
-    }
-    75% {
-        color: #ff0000;
-        text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000;
-    }
-    100% {
-        color: #00ff00;
-        text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00;
-    }
-}
-
-@keyframes ledGlow3 {
-    0% {
-        color: #0099ff;
-        text-shadow: 0 0 10px #0099ff, 0 0 20px #0099ff, 0 0 30px #0099ff;
-    }
-    25% {
-        color: #ffff00;
-        text-shadow: 0 0 10px #ffff00, 0 0 20px #ffff00, 0 0 30px #ffff00;
-    }
-    50% {
-        color: #ff0000;
-        text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000;
-    }
-    75% {
-        color: #00ff00;
-        text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00;
-    }
-    100% {
-        color: #0099ff;
-        text-shadow: 0 0 10px #0099ff, 0 0 20px #0099ff, 0 0 30px #0099ff;
+        text-shadow: 0 0 20px #ffffff, 0 0 40px #00ffff, 0 0 60px #0099ff;
     }
 }
 
