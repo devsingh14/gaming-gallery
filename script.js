@@ -2,6 +2,57 @@
 document.addEventListener('DOMContentLoaded', () => {
     const galleryCards = document.querySelectorAll('.gallery-card');
     const galleryItems = document.querySelectorAll('.gallery-item');
+    const friendsBtn = document.getElementById('friendsBtn');
+    const closeFriendsBtn = document.getElementById('closeFriendsBtn');
+    const friendsList = document.getElementById('friendsList');
+
+    // Friends button functionality
+    friendsBtn.addEventListener('click', () => {
+        friendsList.classList.toggle('hidden');
+        
+        // Animate the list opening
+        if (!friendsList.classList.contains('hidden')) {
+            gsap.fromTo(friendsList,
+                { scale: 0.8, opacity: 0 },
+                { scale: 1, opacity: 1, duration: 0.4, ease: "back.out" }
+            );
+        }
+    });
+
+    // Close friends list button
+    closeFriendsBtn.addEventListener('click', () => {
+        gsap.to(friendsList,
+            { scale: 0.8, opacity: 0, duration: 0.3, ease: "back.in" },
+            () => {
+                friendsList.classList.add('hidden');
+            }
+        );
+    });
+
+    // Close friends list when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!friendsList.classList.contains('hidden') && 
+            !friendsList.contains(e.target) && 
+            e.target !== friendsBtn) {
+            gsap.to(friendsList,
+                { scale: 0.8, opacity: 0, duration: 0.3, ease: "back.in" },
+                () => {
+                    friendsList.classList.add('hidden');
+                }
+            );
+        }
+    });
+
+    // Add hover effect to friends list items
+    const friendItems = document.querySelectorAll('.friends-list li');
+    friendItems.forEach(item => {
+        item.addEventListener('mouseenter', () => {
+            gsap.to(item, { duration: 0.2, color: '#00ffff' });
+        });
+        item.addEventListener('mouseleave', () => {
+            gsap.to(item, { duration: 0.2, color: '#fff' });
+        });
+    });
 
     // Shuffle effect on page load - cards flip and arrange
     gsap.fromTo(galleryCards, 
