@@ -341,3 +341,178 @@ h1 span {
 .lightbox.active img {
     transform: scale(1);
 }
+
+/* Who section (intro) styling */
+.who-section {
+    position: fixed;
+    top: 100px;
+    left: 16px;
+    max-width: 360px;
+    background-color: rgba(0, 0, 0, 0.45);
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 255, 150, 0.12);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+    z-index: 2500;
+}
+
+.who-section h2 {
+    margin: 0 0 8px 0;
+    color: #00ff99;
+    font-size: 1.1rem;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+}
+
+.who-section .intro {
+    text-align: left;
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.4;
+    padding: 0;
+    color: #e6f7ff;
+}
+
+@media (max-width: 600px) {
+    .who-section {
+        position: static;
+        max-width: 100%;
+        margin: 12px;
+        top: auto;
+        left: auto;
+    }
+    .who-section .intro { font-size: 0.95rem; }
+}
+
+/* Featured Image on Page */
+.featured-image-page {
+    position: fixed;
+    top: 380px;
+    right: 16px;
+    max-width: 360px;
+    width: 360px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 255, 150, 0.2);
+    border: 1px solid rgba(0, 255, 150, 0.15);
+    z-index: 2400;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.featured-image-page:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8), 0 0 24px rgba(0, 255, 150, 0.3);
+    border-color: rgba(0, 255, 150, 0.3);
+}
+
+/* Animated graphics around featured image */
+.featured-image-page::before {
+    content: '';
+    position: fixed;
+    top: 380px;
+    right: 16px;
+    width: 390px;
+    height: 390px;
+    border: 2px solid rgba(0, 255, 150, 0.15);
+    border-radius: 10px;
+    animation: orbit-rotate 8s linear infinite;
+    z-index: 2300;
+    pointer-events: none;
+}
+
+.featured-image-page::after {
+    content: '';
+    position: fixed;
+    top: 350px;
+    right: -14px;
+    width: 420px;
+    height: 420px;
+    background: conic-gradient(from 0deg, rgba(0, 255, 150, 0.2), rgba(0, 255, 200, 0.1), transparent);
+    border-radius: 50%;
+    animation: spin-glow 6s linear infinite;
+    z-index: 2200;
+    pointer-events: none;
+}
+
+@keyframes orbit-rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes spin-glow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(-360deg); }
+}
+
+/* Pulsing glow around image */
+.featured-image-page {
+    box-shadow: 
+        0 8px 30px rgba(0, 0, 0, 0.6), 
+        0 0 20px rgba(0, 255, 150, 0.2),
+        0 0 40px rgba(0, 255, 150, 0.1);
+    animation: pulse-glow 2.5s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+    0%, 100% {
+        box-shadow: 
+            0 8px 30px rgba(0, 0, 0, 0.6), 
+            0 0 20px rgba(0, 255, 150, 0.2),
+            0 0 40px rgba(0, 255, 150, 0.1);
+    }
+    50% {
+        box-shadow: 
+            0 8px 30px rgba(0, 0, 0, 0.7), 
+            0 0 30px rgba(0, 255, 150, 0.4),
+            0 0 60px rgba(0, 255, 150, 0.2);
+    }
+}
+
+@media (max-width: 1024px) {
+    .featured-image-page {
+        position: static;
+        max-width: 100%;
+        margin: 20px auto;
+        top: auto;
+        right: auto;
+    }
+    .featured-image-page::before,
+    .featured-image-page::after {
+        display: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .featured-image-page {
+        max-width: 100%;
+        margin: 16px 12px;
+    }
+}
+
+/* Top-right logo (recent photo) */
+#top-right-logo {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    width: 72px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.6), 0 0 12px rgba(0,255,150,0.25);
+    z-index: 3000;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    background-color: rgba(255,255,255,0.03);
+}
+
+#top-right-logo:hover {
+    transform: scale(1.06);
+    opacity: 0.95;
+}
+
+@media (max-width: 480px) {
+    #top-right-logo {
+        width: 48px;
+        top: 10px;
+        right: 10px;
+    }
+}
