@@ -154,4 +154,6 @@ document.addEventListener('DOMContentLoaded', () => {
             lightbox.classList.remove('active');
         }, 500);
     });
+    
 });
+
