@@ -11,29 +11,65 @@ document.addEventListener('DOMContentLoaded', () => {
     // Gallery button functionality
     galleryBtn.addEventListener('click', () => {
         gallery.classList.toggle('hidden');
-        
-        // Animate the gallery opening
+
         if (!gallery.classList.contains('hidden')) {
+            // Gallery opening: blur intro text and image, add backdrop layer
+            const backdrop = document.createElement('div');
+            backdrop.className = 'gallery-backdrop';
+            backdrop.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 1999;
+                pointer-events: none;
+            `;
+            document.body.appendChild(backdrop);
+
+            gsap.to('.who-section', { opacity: 0, duration: 0.5 });
+            gsap.to('.featured-image-page', { opacity: 0, duration: 0.5 });
+
+            // Adjust z-indexes for layering
+            document.querySelector('.who-section').style.zIndex = '1998';
+            document.querySelector('.featured-image-page').style.zIndex = '1998';
+            gallery.style.zIndex = '2000';
+
+            // Animate the gallery opening
             const galleryCardsToAnimate = document.querySelectorAll('.gallery-card');
-            gsap.fromTo(galleryCardsToAnimate, 
-                { 
-                    opacity: 0, 
-                    rotationY: 90, 
+            gsap.fromTo(galleryCardsToAnimate,
+                {
+                    opacity: 0,
+                    rotationY: 90,
                     scale: 0.5,
                     y: -50,
                     z: 100
-                }, 
-                { 
-                    opacity: 1, 
-                    rotationY: 0, 
+                },
+                {
+                    opacity: 1,
+                    rotationY: 0,
                     scale: 1,
                     y: 0,
                     z: 0,
-                    duration: 0.8, 
-                    stagger: 0.1, 
+                    duration: 0.8,
+                    stagger: 0.1,
                     ease: "back.out"
                 }
             );
+        } else {
+            // Gallery closing: remove blur and backdrop
+            const backdrop = document.querySelector('.gallery-backdrop');
+            if (backdrop) {
+                gsap.to(backdrop, { opacity: 0, duration: 0.5, onComplete: () => backdrop.remove() });
+            }
+            gsap.to('.who-section', { opacity: 1, duration: 0.5 });
+            gsap.to('.featured-image-page', { opacity: 1, duration: 0.5 });
+
+            // Restore original z-indexes
+            document.querySelector('.who-section').style.zIndex = '2500';
+            document.querySelector('.featured-image-page').style.zIndex = '2400';
+            gallery.style.zIndex = '';
         }
     });
 
