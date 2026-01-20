@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const friendsList = document.getElementById('friendsList');
     const galleryBtn = document.getElementById('galleryBtn');
     const gallery = document.querySelector('.gallery');
-
+    const scope = document.getElementById('scope');
     // Gallery button functionality
     galleryBtn.addEventListener('click', () => {
         gallery.classList.toggle('hidden');
@@ -65,10 +65,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             gsap.to('.who-section', { opacity: 1, duration: 0.5 });
             gsap.to('.featured-image-page', { opacity: 1, duration: 0.5 });
+            gsap.to('.scope', { opacity: 1, duration: 0.5 });
+           
 
             // Restore original z-indexes
             document.querySelector('.who-section').style.zIndex = '2500';
             document.querySelector('.featured-image-page').style.zIndex = '2400';
+            document.querySelector('.scope').style.zIndex = '2300';
             gallery.style.zIndex = '';
         }
     });
@@ -155,5 +158,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 500);
     });
     
-});
+    });
 
