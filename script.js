@@ -8,11 +8,51 @@ document.addEventListener('DOMContentLoaded', () => {
     const galleryBtn = document.getElementById('galleryBtn');
     const gallery = document.querySelector('.gallery');
     const scope = document.getElementById('scope');
+    // ===== SCOPE ANIMATION =====
+let scopeTween;
+
+function startScopeAnimation() {
+    if (scopeTween) scopeTween.kill();
+    scopeTween = gsap.to(scope, {
+        scale: () => gsap.utils.random(0.5, 5),
+        duration: () => gsap.utils.random(1, 2),
+        ease: "power2.inOut",
+        repeat: -1,
+        yoyo: true
+    });
+}
+
+
+function hideScope() {
+    if (scopeTween) scopeTween.pause();
+    gsap.to(scope, {
+        opacity: 0,
+        scale: 0,
+        duration: 0.35,
+        ease: "power2.out"
+    });
+}
+
+function showScope() {
+    gsap.to(scope, {
+        opacity: 1,
+        scale: 1,
+        duration: 0.45,
+        ease: "power2.out",
+        onComplete: () => {
+            if (scopeTween) scopeTween.resume();
+        }
+    });
+}
+
+startScopeAnimation();
+
     // Gallery button functionality
     galleryBtn.addEventListener('click', () => {
         gallery.classList.toggle('hidden');
 
         if (!gallery.classList.contains('hidden')) {
+            hideScope();
             // Gallery opening: blur intro text and image, add backdrop layer
             const backdrop = document.createElement('div');
             backdrop.className = 'gallery-backdrop';
@@ -41,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
             gsap.fromTo(galleryCardsToAnimate,
                 {
                     opacity: 0,
-                    rotationY: 90,
+                    rotationY: 60,
                     scale: 0.5,
                     y: -50,
                     z: 100
@@ -58,6 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             );
         } else {
+            showScope();
             // Gallery closing: remove blur and backdrop
             const backdrop = document.querySelector('.gallery-backdrop');
             if (backdrop) {
@@ -65,13 +106,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             gsap.to('.who-section', { opacity: 1, duration: 0.5 });
             gsap.to('.featured-image-page', { opacity: 1, duration: 0.5 });
-            gsap.to('.scope', { opacity: 1, duration: 0.5 });
+            
            
 
             // Restore original z-indexes
             document.querySelector('.who-section').style.zIndex = '2500';
             document.querySelector('.featured-image-page').style.zIndex = '2400';
-            document.querySelector('.scope').style.zIndex = '2300';
+            scope.style.zIndex = '1500';
             gallery.style.zIndex = '';
         }
     });
@@ -82,6 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Animate the list opening
         if (!friendsList.classList.contains('hidden')) {
+            hideScope();
             gsap.fromTo(friendsList,
                 { scale: 0.8, opacity: 0 },
                 { scale: 1, opacity: 1, duration: 0.4, ease: "back.out" }
@@ -91,23 +133,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Close friends list button
     closeFriendsBtn.addEventListener('click', () => {
-        gsap.to(friendsList,
-            { scale: 0.8, opacity: 0, duration: 0.3, ease: "back.in" },
-            () => {
-                friendsList.classList.add('hidden');
-            }
-        );
+    gsap.to(friendsList, {
+        scale: 0.8,
+        opacity: 0,
+        duration: 0.3,
+        ease: "back.in",
+        onComplete: () => {
+            friendsList.classList.add('hidden');
+            showScope();
+        }
     });
+});
 
     // Close friends list when clicking outside
     document.addEventListener('click', (e) => {
         if (!friendsList.classList.contains('hidden') && 
             !friendsList.contains(e.target) && 
-            e.target !== friendsBtn) {
+            e.target !== friendsBtn)
+             {
             gsap.to(friendsList,
                 { scale: 0.8, opacity: 0, duration: 0.3, ease: "back.in" },
                 () => {
                     friendsList.classList.add('hidden');
+                    showScope();
                 }
             );
         }

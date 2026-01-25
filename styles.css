@@ -102,7 +102,7 @@ header {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #1a1a1a;
+    background-color: #fefdfd00;
     border: 2px solid #00ff00;
     border-radius: 12px;
     padding: 30px;
@@ -153,7 +153,7 @@ header {
 .friends-list li {
     padding: 12px 15px;
     margin-bottom: 10px;
-    background-color: #222;
+    background-color: #ecdcdc2b;
     border-left: 3px solid #00ff00;
     color: #fff;
     font-size: 1.05em;
@@ -163,7 +163,7 @@ header {
 }
 
 .friends-list li:hover {
-    background-color: #333;
+    background-color: #000000;
     border-left-color: #00ffff;
     color: #00ff00;
     box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
