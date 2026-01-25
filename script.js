@@ -53,20 +53,7 @@ startScopeAnimation();
 
         if (!gallery.classList.contains('hidden')) {
             hideScope();
-            // Gallery opening: blur intro text and image, add backdrop layer
-            const backdrop = document.createElement('div');
-            backdrop.className = 'gallery-backdrop';
-            backdrop.style.cssText = `
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(0, 0, 0, 0.5);
-                z-index: 1999;
-                pointer-events: none;
-            `;
-            document.body.appendChild(backdrop);
+            
 
             gsap.to('.who-section', { opacity: 0, duration: 0.5 });
             gsap.to('.featured-image-page', { opacity: 0, duration: 0.5 });
@@ -145,21 +132,7 @@ startScopeAnimation();
     });
 });
 
-    // Close friends list when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!friendsList.classList.contains('hidden') && 
-            !friendsList.contains(e.target) && 
-            e.target !== friendsBtn)
-             {
-            gsap.to(friendsList,
-                { scale: 0.8, opacity: 0, duration: 0.3, ease: "back.in" },
-                () => {
-                    friendsList.classList.add('hidden');
-                    showScope();
-                }
-            );
-        }
-    });
+   
 
     // Add hover effect to friends list items
     const friendItems = document.querySelectorAll('.friends-list li');
